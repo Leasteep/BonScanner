@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -61,4 +62,18 @@ public class PhoneCamera : MonoBehaviour
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
     }
 
+    public void TakePhoto()  
+    {
+
+        Texture2D photo = new Texture2D(backCam.width, backCam.height);
+        photo.SetPixels(backCam.GetPixels());
+        photo.Apply();
+
+        //Encode to a PNG
+        byte[] bytes = photo.EncodeToPNG();
+        File.WriteAllBytes(Path.Combine(Directory.GetCurrentDirectory(), "Bons", "picture.png"), bytes);
+    }
+
 }
+
+
