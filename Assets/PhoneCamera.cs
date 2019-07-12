@@ -55,8 +55,8 @@ public class PhoneCamera : MonoBehaviour
         fit.aspectRatio = ratio;
 
         // landscape vs. portrait mode
-        float scaleY = backCam.videoVerticallyMirrored ? -1f : 1f;
-        background.rectTransform.localScale = new Vector3(1f, scaleY, 1f);
+        // float scaleY = backCam.videoVerticallyMirrored ? 1f : 1f;
+        // background.rectTransform.localScale = new Vector3(1f, scaleY, 1f);
 
         int orient = -backCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
@@ -72,6 +72,8 @@ public class PhoneCamera : MonoBehaviour
         //Encode to a PNG
         byte[] bytes = photo.EncodeToPNG();
         File.WriteAllBytes(Path.Combine(Directory.GetCurrentDirectory(), "Bons", "picture.png"), bytes);
+
+        Debug.Log("New Photo Taken");
     }
 
 }
